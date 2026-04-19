@@ -3,30 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benvenuto</title>
+    <title>ANTANI | Fine Dining</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Italiana&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: system-ui, sans-serif;
+        :root {
+            --bg: #0a0a0a;
+            --text: #f5f0e8;
+            --gold: #c9a227;
+            --gold-dim: #8a7019;
+            --overlay: rgba(5, 5, 5, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: #f5f5f5;
+            overflow: hidden;
         }
-        main {
+
+.hero-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #1a1a1a;
+            background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920');
+            background-size: cover;
+            background-position: center;
+            animation: slowZoom 20s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(10,10,10,0.9));
+            z-index: 5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
             text-align: center;
             padding: 2rem;
         }
-        h1 {
-            color: #333;
+
+.brand {
+            font-family: 'Italiana', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+            opacity: 0;
+            animation: fadeUp 1.2s ease 0.2s forwards;
+        }
+
+        .est {
+            font-family: 'Italiana', serif;
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--text);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.5s forwards;
+        }
+
+        .tagline {
+            font-size: clamp(1.8rem, 5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.3;
+            letter-spacing: 0.05em;
+            margin-top: 2.5rem;
+        }
+
+        .tagline span {
+            display: block;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp 1.2s ease forwards;
+        }
+
+        .tagline span:nth-child(1) { animation-delay: 0.8s; }
+        .tagline span:nth-child(2) { animation-delay: 1.0s; }
+        .tagline span:nth-child(3) { animation-delay: 1.2s; }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 1.5rem auto;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.4s forwards;
+        }
+
+.cta {
+            font-family: 'Italiana', serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text);
+            opacity: 0;
+            animation: fadeUp 1s ease 1.6s forwards;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 1px solid #c9a227;
+            padding: 1rem 2rem;
+            display: inline-block;
+        }
+
+        .cta:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .cta:hover .cta-sub {
+            color: var(--bg);
+        }
+
+        .cta-sub {
+            display: none;
+            font-size: 0.7rem;
+            color: var(--text);
+            margin-top: 0.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .cta:hover .cta-sub {
+            color: var(--bg);
+        }
+
+        .gold-glow {
+            color: var(--gold);
+            text-shadow: 0 0 60px rgba(201, 162, 39, 0.4);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 200;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+        }
+
+        .logo {
+            font-family: 'Italiana', serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+        }
+
+.menu-btn {
+            font-family: 'Italiana', serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: var(--text);
+            background: none;
+            border: 1px solid var(--gold-dim);
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .menu-btn:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .menu-btn:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .lang-switch {
+            position: relative;
+            font-family: 'Italiana', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: var(--text);
+            background: none;
+            border: 1px solid var(--gold-dim);
+            padding: 0.5rem 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+.lang-btn.active {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .lang-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Italiana', serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            opacity: 0;
+            animation: fadeUp 1s ease 1.8s forwards;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1.5rem; }
+            .brand { letter-spacing: 0.3em; }
         }
     </style>
 </head>
 <body>
-    <main>
-        <h1>Ciao!</h1>
-        <p>Questo è il tuo sito.</p>
-    </main>
+    <nav>
+        <div class="nav-right">
+            <button class="menu-btn">Menu</button>
+            <!--button class="menu-btn">Contacts</button-->
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <!--p class="brand">BOTTEGA D'ANNUNZIANA</p-->
+            <p class="brand">RESTAURANT</p>
+            <p class="est">Est. 2024</p>
+            <div class="tagline">
+                <span>Taste</span>
+                <span>Stay</span>
+                <span class="gold-glow">Visit</span>
+            </div>
+            <div class="divider"></div>
+            <a href="https://wa.me/393898318610?text=Ciao,%20vorrei%20prenotare%20un%20tavolo" target="_blank" rel="noopener" class="cta">
+                <span class="cta-main">Prenota</span>
+                <span class="cta-sub">Book</span>
+            </a>
+        </div>
+        <p class="scroll-hint">Scopri di più</p>
+    </section>
+
+<script>
+        var isEn = false;
+        var lang = localStorage.getItem('lang') === 'en';
+
+        function toggleLang() {
+            isEn = !isEn;
+            localStorage.setItem('lang', isEn ? 'en' : 'it');
+            document.querySelectorAll('.cta-main, .cta-sub').forEach(function(el, i) {
+                el.style.display = (isEn && i === 1) || (!isEn && i === 0) ? 'inline' : 'none';
+            });
+            document.querySelector('.scroll-hint').textContent = isEn ? 'Discover more' : 'Scopri di più';
+            document.querySelector('.lang-btn').textContent = isEn ? 'IT' : 'EN';
+            document.querySelector('.lang-btn').classList.toggle('active', isEn);
+        }
+
+        document.querySelector('.lang-btn').addEventListener('click', toggleLang);
+
+        if (lang) toggleLang();
+    </script>
 </body>
 </html>
